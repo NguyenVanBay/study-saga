@@ -10,11 +10,6 @@ export interface AuthState {
 export interface LoginPayload {
   username: string;
   password: string;
-  navigate: Function;
-}
-
-export interface LogoutPayload {
-  navigate: Function;
 }
 
 const initialState: AuthState = {
@@ -42,7 +37,7 @@ const authSlice = createSlice({
       state.logging = false;
     },
 
-    logout(state, action: PayloadAction<LogoutPayload>) {
+    logout(state) {
       state.isLoggedIn = false;
       state.currentUser = undefined;
     }

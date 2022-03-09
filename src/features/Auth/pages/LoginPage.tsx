@@ -4,7 +4,6 @@ import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import { useAppDispatch } from "../../../app/hooks";
 import { authActions } from "../authSlice";
-import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -21,8 +20,6 @@ const useStyles = makeStyles({
 });
 
 export default function LoginPage() {
-  let navigate = useNavigate();
-
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const handleLogin = () => {
@@ -30,7 +27,6 @@ export default function LoginPage() {
       authActions.login({
         username: "bay",
         password: "1234567",
-        navigate: navigate,
       })
     );
   };

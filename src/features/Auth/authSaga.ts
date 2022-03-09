@@ -1,10 +1,7 @@
-import { createBrowserHistory } from 'history';
 import { put } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, fork, take } from 'redux-saga/effects';
-import { LoginPayload, authActions, LogoutPayload } from './authSlice';
-
-const history = createBrowserHistory();
+import { LoginPayload, authActions } from './authSlice';
 
 function* handleLogin(payload: LoginPayload) {
   try {
@@ -15,16 +12,13 @@ function* handleLogin(payload: LoginPayload) {
         name: 'Baynv',
       })
     );
-
-    payload.navigate('/admin');
   } catch (error: any) {
     yield put(authActions.loginFailed(error.message));
   }
 }
 
-function* handleLogout(payload: LogoutPayload) {
+function* handleLogout() {
   yield localStorage.removeItem('access_token');
-  payload.navigate('/login');
 }
 
 function* watchLoginFlow() {
@@ -36,8 +30,7 @@ function* watchLoginFlow() {
       yield fork(handleLogin, action.payload);
     }
     
-    const action: PayloadAction<LoginPayload> = yield take(authActions.logout.type);
-    yield call(handleLogout, action.payload);
+    yield call(handleLogout);
   }
 }
 
