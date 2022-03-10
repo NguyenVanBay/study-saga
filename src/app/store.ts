@@ -3,6 +3,8 @@ import counterReducer from '../features/counter/counterSlice';
 import authReducer from '../features/Auth/authSlice';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
+import {createBrowserHistory} from 'history'
+const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   counter: counterReducer,

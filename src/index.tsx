@@ -4,18 +4,25 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import * as serviceWorker from "./serviceWorker";
+// import { HistoryRouter } from "./history-router";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 import { store } from "./app/store";
 import App from "./App";
 import "./index.css";
-
+import { Link, Route, Routes } from "react-router-dom";
+const history = createBrowserHistory();
+const Foo = () => <div>1</div>;
+const Bar = () => <div>2</div>;
+const Qux = () => <div>123</div>;
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <HistoryRouter history={history}>
         <CssBaseline />
         <App />
-      </BrowserRouter>
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
